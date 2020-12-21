@@ -1,0 +1,87 @@
+Method<br>
+<input type="text" id="method" value="post">
+<br>
+To what Page?<br>
+<input type="text" id="url" value="http://localhost/getKey">
+<br>
+msg Body:<br>
+<input type="text" id="msg-body" value="my_key">
+<br><br>
+<input type="submit" value="Submit" onclick="Send()"><br><br>
+<textarea id="output"></textarea>
+<h2>Examples</h2>
+<p>
+    method: post<br>
+    url: http://localhost/getKey<br>
+    msg: my_key<br>
+</p>
+<p>
+    method: post<br>
+    url: http://localhost/setKey/my_key<br>
+    msg: key_value<br>
+</p>
+<p>
+    method: get<br>
+    url: http://localhost/setKey/my_key/key_value<br>
+    msg: <br>
+</p>
+<p>
+    method: get<br>
+    url: http://localhost/getKey/my_key<br>
+    msg: <br>
+</p>
+<script >
+
+
+function getElement(id){
+    return document.getElementById(id)
+}
+
+const method=getElement("method")
+const url=getElement("url")
+const msg_body=getElement("msg-body")
+const output=getElement("output")
+
+const options={
+    "get":{
+
+        "get":true,
+        "Get":true,
+        "GET":true,
+    },
+    "post":{
+
+        "post":true,
+        "Post":true,
+        "POST":true
+    }    
+}
+
+async function Send(){
+    if (method.value in options.get){
+        try{
+
+            fetch(url.value).then(response=>response.text()).then(data=>output.value=data)
+        }catch(err){
+            alert(`request fail with error ${err}`)
+        }
+    }else{
+        alert
+        if(method.value in options.post){
+            try{
+
+                var response=await fetch(url.value,{
+                    method: 'POST',
+                    "Content-Type":"text/html",
+                    body: msg_body.value
+                })
+                output.value=await response.text()  
+            }catch(err){
+                alert(`request fail with error ${err}`)
+            }
+        }
+    }
+}
+
+
+</script>
