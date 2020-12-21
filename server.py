@@ -6,7 +6,7 @@ Created on Mon Feb 25 18:12:02 2019
 """
 
 import flask as fl
-
+from sys import argv
 
 app = fl.Flask(__name__, static_url_path='')
 
@@ -48,4 +48,4 @@ def setKeyPost(key):
 	return resp
      
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=80)
+    app.run(host='0.0.0.0', port=argv[1])
